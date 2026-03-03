@@ -1,0 +1,243 @@
+/* --- Configurações Gerais --- */
+:root {
+    --cor-principal: #d4af37; /* Dourado chique */
+    --cor-fundo: #fafafa;
+    --cor-texto: #333;
+    --whatsapp-green: #25d366;
+}
+
+* { margin: 0; padding: 0; font-family: 'Helvetica Neue', Arial, sans-serif; }
+
+body { background-color: var(--cor-fundo); color: var(--cor-texto); margin: 0;}
+
+/* --- Cabeçalho (Header) --- */
+header {
+    background: white;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+#hero-section {
+    background-color: #d4af37;
+    color: white;
+    width: 96vw;
+    padding: 1vh 2vw;
+    text-align: center;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.icone-brinde {
+    font-size: 2rem;
+}
+
+h1 {
+    font-size: 1.8rem;
+    color: #444;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Busca */
+#busca-conteiner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-direction: row;
+    margin: 2vh auto 2vh auto;
+}
+
+#busca-input {
+    display: block;
+    min-width: 8.8vw;
+    height: 3.8vh;
+    padding: 0.2vh 0.6vw;
+    border: 1px solid lightgray;
+    justify-self: center;
+}
+/*
+#busca-conteiner > button {
+    background-color: none;
+    border: none;
+    border-radius: 80%;
+    padding: 6px;
+}*/
+
+/* Conteúdo principal */
+#galeria {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    margin: 0 2vw;
+}
+
+.item-galeria {
+    text-align: center;
+}
+
+.item-galeria > img {
+    width: 30vw;
+    height: 30vw;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+/* Footer (Roda-pé) */
+footer {
+    background-color: #2c2c2c; /* Cinza chumbo elegante */
+    color: #f0f0f0;            /* Branco suave para não cansar a vista */
+    padding-top: 20px;
+    margin-top: 3vh;          /* Espaço para separar do conteúdo acima */
+    text-align: center;
+}
+
+.footer-content {
+    padding: 0 20px 30px 20px;
+    max-width: 800px;
+    margin: 0 auto;            /* Centraliza em telas grandes */
+}
+
+footer h3 {
+    font-size: 2rem;
+    font-family: 'Georgia', serif; /* Fonte mais clássica para a marca */
+    color: var(--cor-principal);   /* O dourado (#d4af37) */
+    margin-bottom: 10px;
+}
+
+.slogan {
+    font-style: italic;
+    opacity: 0.7;
+    margin-bottom: 25px;
+}
+
+/* --- Ícones de Redes Sociais --- */
+.social-links {
+    margin-bottom: 20px;
+}
+
+.social-links a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 45px;
+    height: 45px;
+    background: rgba(255,255,255,0.1); /* Fundo translúcido */
+    color: white;
+    margin: 0 8px;
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    background: var(--cor-principal); /* Fica dourado ao passar o mouse */
+    transform: translateY(-3px);      /* Efeito de "pulo" */
+}
+
+/* --- Informações de Contato --- */
+.contato-info p {
+    margin: 10px 0 0 0;
+    font-size: 0.95rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px; /* Espaço entre ícone e texto */
+}
+
+.contato-info i {
+    color: var(--cor-principal);
+}
+
+/* --- Copyright (Rodapé do Rodapé) --- */
+.copyright {
+    background-color: #1a1a1a; /* Um tom ainda mais escuro */
+    padding: 20px;
+    font-size: 0.8rem;
+    color: #888;
+    border-top: 1px solid #444;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Estilização do Botão */
+.whatsapp-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 40px;
+    right: 40px;
+    background-color: #25d366;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 2px 2px 3px #999;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.whatsapp-float:hover {
+    background-color: #128c7e;
+    transform: scale(1.1);
+    color: white;
+}
+
+/* Animação opcional de "pulso" para chamar atenção */
+.whatsapp-float::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background-color: #25d366;
+    position: absolute;
+    border-radius: 50%;
+    z-index: -1;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(1.5); opacity: 0; }
+}
+
+#conteiner-ver-mais {
+    display: flex;
+    justify-content: center;
+    margin-top: 3vh;
+}
+
+#ver-mais {
+    border-radius: 15px;
+    color: #fafafa;
+    background-color: var(--cor-principal);
+    padding: 5px 8px;
+    border: none;
+}
+
+@media (min-width: 600px) {
+    main {
+        width: 60vw;
+        margin: 0 auto;
+    }
+    .item-galeria > img {
+        width: 20vw;
+        height: 20vw;
+    }
+}
