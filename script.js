@@ -9,7 +9,7 @@ for(let i = 9; i < fotos.length; i++)
   fotos[i].classList.toggle("hidden");
 
 let aberto = false;
-
+ 
 botaoVerMaisEl.addEventListener( 'click', () => {
   aberto = !aberto
   for(let i = 9; i < fotos.length; i++) 
