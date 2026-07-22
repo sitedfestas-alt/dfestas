@@ -1,0 +1,95 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# Onde ficam os uploads feitos "avulsos" pelo editor de rich text (não usado aqui,
+# mas exigido pelo schema do Decap CMS).
+media_folder: "imagens"
+public_folder: "/imagens"
+
+# O painel some sozinho quando um deploy está rodando; não precisa mexer aqui.
+publish_mode: simple
+
+collections:
+  - name: "galerias"
+    label: "Galerias de Fotos"
+    files:
+      - name: "mesas_e_cadeiras"
+        label: "Mesas e Cadeiras"
+        file: "content/galerias/mesas-e-cadeiras.yml"
+        fields:
+          - { label: "Título da página", name: "titulo", widget: "string" }
+          - label: "Fotos"
+            name: "imagens"
+            widget: "list"
+            summary: "{{fields.imagem}}"
+            field:
+              label: "Foto"
+              name: "imagem"
+              widget: "image"
+              media_folder: "/imagens/mesas e cadeiras"
+              public_folder: "/imagens/mesas e cadeiras"
+
+      - name: "utensilios_de_mesa"
+        label: "Utensílios de Mesa"
+        file: "content/galerias/utensilios-de-mesa.yml"
+        fields:
+          - { label: "Título da página", name: "titulo", widget: "string" }
+          - label: "Fotos"
+            name: "imagens"
+            widget: "list"
+            summary: "{{fields.imagem}}"
+            field:
+              label: "Foto"
+              name: "imagem"
+              widget: "image"
+              media_folder: "/imagens/utensilios de mesa"
+              public_folder: "/imagens/utensilios de mesa"
+
+      - name: "forros_de_mesa"
+        label: "Forros de Mesa"
+        file: "content/galerias/forros-de-mesa.yml"
+        fields:
+          - { label: "Título da página", name: "titulo", widget: "string" }
+          - label: "Fotos"
+            name: "imagens"
+            widget: "list"
+            summary: "{{fields.imagem}}"
+            field:
+              label: "Foto"
+              name: "imagem"
+              widget: "image"
+              media_folder: "/imagens/forros de mesa"
+              public_folder: "/imagens/forros de mesa"
+
+      - name: "mobiliario_de_estar"
+        label: "Mobiliário de Estar"
+        file: "content/galerias/mobiliario-de-estar.yml"
+        fields:
+          - { label: "Título da página", name: "titulo", widget: "string" }
+          - label: "Fotos"
+            name: "imagens"
+            widget: "list"
+            summary: "{{fields.imagem}}"
+            field:
+              label: "Foto"
+              name: "imagem"
+              widget: "image"
+              media_folder: "/imagens/mobiliario de estar"
+              public_folder: "/imagens/mobiliario de estar"
+
+      - name: "equipamentos_para_buffet"
+        label: "Equipamentos para Buffet"
+        file: "content/galerias/equipamentos-para-buffet.yml"
+        fields:
+          - { label: "Título da página", name: "titulo", widget: "string" }
+          - label: "Fotos"
+            name: "imagens"
+            widget: "list"
+            summary: "{{fields.imagem}}"
+            field:
+              label: "Foto"
+              name: "imagem"
+              widget: "image"
+              media_folder: "/imagens/equipamentos para buffet"
+              public_folder: "/imagens/equipamentos para buffet"
