@@ -249,40 +249,34 @@
         <i class="fab fa-whatsapp"></i>
     </a>
     <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-yaml@4/dist/js-yaml.min.js"></script>
     <script>
         async function carregarGaleria() {
-            const url = "https://api.github.com/repos/sitedfestas-alt/dfestas/contents/imagens/forros%20de%20mesa";
+            const url = "https://raw.githubusercontent.com/sitedfestas-alt/dfestas/main/content/galerias/forros-de-mesa.yml";
 
             try {
                 const resposta = await fetch(url);
-                const arquivos = await resposta.json();
+                const texto = await resposta.text();
+                const dados = jsyaml.load(texto);
 
                 const container = document.getElementById("galeria");
-
-                // limpa tudo antes
                 container.innerHTML = "";
 
-                arquivos.forEach(arquivo => {
-                    // filtra só imagens
-                    if (
-                        arquivo.type === "file" &&
-                        arquivo.name.match(/\.(jpg|jpeg|png|gif|webp)$/i)
-                    ) {
-                        const div = document.createElement("div");
-                        div.className = "item-galeria";
+                (dados.imagens || []).forEach(caminho => {
+                    const div = document.createElement("div");
+                    div.className = "item-galeria";
 
-                        const img = document.createElement("img");
-                        img.src = arquivo.download_url;
-                        img.alt = arquivo.name;
+                    const img = document.createElement("img");
+                    img.src = ".." + caminho;
+                    img.alt = caminho.split("/").pop();
 
-                        const label = document.createElement("label");
-                        label.textContent = ""; // pode colocar nome depois se quiser
+                    const label = document.createElement("label");
+                    label.textContent = "";
 
-                        div.appendChild(img);
-                        div.appendChild(label);
+                    div.appendChild(img);
+                    div.appendChild(label);
 
-                        container.appendChild(div);
-                    }
+                    container.appendChild(div);
                 });
 
             } catch (erro) {

@@ -7,12 +7,14 @@
 - `index.html` — adicionado o widget do Netlify Identity (necessário para o link de
   convite por e-mail funcionar e redirecionar para `/admin`).
 
-Como as páginas do catálogo já buscam a lista de arquivos direto da API do GitHub
-(`api.github.com/repos/sitedfestas-alt/dfestas/contents/imagens/...`) em tempo real,
-**nenhuma outra página do site precisou ser alterada** — qualquer foto que o CMS
-subir para essas pastas aparece no site automaticamente, sem rebuild.
+As 5 páginas de `catalogo/*.html` foram atualizadas: agora elas leem a ordem e a
+lista de fotos direto do `content/galerias/<categoria>.yml` correspondente (via
+`raw.githubusercontent.com`, usando a lib `js-yaml` por CDN), em vez de listar a
+pasta `imagens/` pela API do GitHub. Isso faz valer a ordem que o administrador
+definir no CMS (arraste os itens da lista para reordenar) e faz uma foto
+removida da lista no CMS sumir de fato da página.
 
-## Passos a fazer no painel do Netlify (feito)
+## Passos a fazer no painel do Netlify (uma vez só)
 1. **Site settings → Identity → Enable Identity.**
 2. Em Identity → **Registration preferences**, deixe como "Invite only" (para
    ninguém além do administrador criar conta sozinho).
@@ -32,19 +34,17 @@ subir para essas pastas aparece no site automaticamente, sem rebuild.
   repo, embora o restante do site só atualize após o build).
 
 ## Ressalvas importantes
-1. **Remover uma foto da lista no CMS não apaga o arquivo do repositório.**
-   O widget de lista (`imagens`) só edita esse arquivo `.yml` de metadados — que
-   o site, hoje, nem chega a ler. Para a foto realmente sumir da página (que lê a
-   pasta direto), o administrador precisa apagar o arquivo pela **Media Library**
-   do próprio Decap CMS (ícone de mídia no menu superior → entrar na pasta da
-   categoria → excluir o arquivo), não só removê-lo da lista dentro da entrada.
-   Vale a pena testar esse fluxo com o cliente antes de liberar.
-2. **Limite de taxa da API do GitHub.** O fetch em tempo real é feito sem
-   autenticação (60 requisições/hora por IP). Em uso normal isso não costuma ser
-   problema, mas se o catálogo tiver picos de tráfego vale considerar migrar
-   esse fetch para ler os `.yml` gerados pelo build (abordagem original do
-   planejamento) ou usar o Netlify Image CDN.
-3. **Ordenação manual** não se reflete no site hoje, porque a página lê a ordem
-   que a API do GitHub devolve (alfabética), não a ordem da lista no CMS. Dá para
-   resolver depois trocando o fetch das páginas para ler os `.yml` de
-   `content/galerias/` em vez da API do GitHub — aí a ordem do CMS passa a valer.
+1. **Cache de alguns minutos.** `raw.githubusercontent.com` é servido por CDN e
+   guarda cache por ~5 minutos. Depois de editar no CMS, pode levar um pouco até
+   a página realmente atualizar — não é instantâneo como antes.
+2. **O `.yml` precisa ficar sincronizado com a pasta de imagens.** Se alguém
+   apagar um arquivo de imagem direto no GitHub sem tirá-lo da lista no CMS (ou
+   vice-versa), a página vai tentar exibir uma foto que não existe mais (link
+   quebrado) ou vai deixar de mostrar uma foto que ainda está lá. Na prática,
+   isso significa: **toda alteração de fotos deve ser feita pelo painel /admin**,
+   não direto pelo GitHub.
+3. **Remover uma foto da lista no CMS não apaga o arquivo físico do
+   repositório** — ele fica órfão na pasta `imagens/`, só não aparece mais no
+   site. Isso é inofensivo (não pesa no carregamento da página), mas se quiser
+   liberar espaço de tempos em tempos, apague pela **Media Library** do Decap
+   CMS (ícone de mídia no menu superior → pasta da categoria → excluir).
