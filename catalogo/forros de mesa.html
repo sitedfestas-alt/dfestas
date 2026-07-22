@@ -252,7 +252,7 @@
     <script src="https://cdn.jsdelivr.net/npm/js-yaml@4/dist/js-yaml.min.js"></script>
     <script>
         async function carregarGaleria() {
-            const url = "https://raw.githubusercontent.com/sitedfestas-alt/dfestas/main/content/galerias/forros-de-mesa.yml";
+            const url = "https://raw.githubusercontent.com/sitedfestas-alt/dfestas/main/content/galerias/forros-de-mesa.yml?t=" + Date.now();
 
             try {
                 const resposta = await fetch(url);
